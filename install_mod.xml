@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[Smashable Christmas Lights]]></title>
+		<description lang="en"><![CDATA[Puts a string of smashable christmas lights above the header. When you hover over the light with your mouse they smash.]]></description>
+		<author-notes lang="en"><![CDATA[Works on prosilver and subsilver2 styles.]]></author-notes>
+		<author-group>
+			<author>
+				<realname><![CDATA[Tyler]]></realname>
+				<username><![CDATA[bprsk8r4272]]></username>
+				<homepage><![CDATA[http://gotskillslounge.com]]></homepage>
+				<email><![CDATA[prosk8er@gotskillslounge.com]]></email>
+			</author>
+		</author-group>
+		<mod-version>1.0.0</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.8</target-version>
+		</installation>
+		<history>
+			<entry>
+				<date>2010-12-16</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Initial Release]]></change>
+				</changelog>
+			</entry>
+		</history>
+		<link-group>
+			<link type="template" href="./contrib/subsilver2.xml" lang="en">subsilver2</link>
+		</link-group>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/lights/*.*" to="lights/*.*"/>
+		</copy>
+		<open src="styles/prosilver/template/overall_header.html">
+			<edit>
+				<find><![CDATA[</head>]]></find>
+				<action type="before-add"><![CDATA[<!-- CHRISTMAS LIGHTS -->
+<link rel="stylesheet" media="screen" href="{ROOT_PATH}lights/christmaslights.css" />
+<script type="text/javascript" src="{ROOT_PATH}lights/soundmanager2-nodebug-jsmin.js"></script>
+<script type="text/javascript" src="{ROOT_PATH}lights/animation-min.js"></script>
+<script type="text/javascript" src="{ROOT_PATH}lights/christmaslights.js"></script>
+<script type="text/javascript">
+var urlBase = './lights/';
+soundManager.url = './lights/';
+</script>
+<!-- / CHRISTMAS LIGHTS -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<body id="phpbb" class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">
+]]></find>
+				<action type="after-add"><![CDATA[<div id="lights">
+ <!-- lights go here -->
+</div>]]></action>
+			</edit>
+		</open>
+		<diy-instructions lang="en"><![CDATA[Login to your forum as admin, purge the cache, and refresh the template in the ACP.
+If you have problems clicking links in an area under the lightbulbs, you have to open lights/christmaslights.css and find the class #lights { and change height:96px; to a value that is appropriate, some browsers this div object overlays the normal site and so you cannot click anything. It's set by default to 96px so it doesn't get in conflict with any site object.
+don't set it too tiny, otherwise the exploding fragments will disappear too early and won't look so nice.]]></diy-instructions>
+	</action-group>
+</mod>
