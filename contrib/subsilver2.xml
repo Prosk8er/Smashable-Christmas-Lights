@@ -40,7 +40,7 @@
 		<open src="styles/subsilver2/template/overall_header.html">
 			<edit>
 				<find><![CDATA[</head>]]></find>
-				<action type="before-add"><![CDATA[<!-- CHRISTMAS LIGHTS -->
+				<action type="before-add"><![CDATA[<!-- IF S_SCL_ENABLED -->
 <link rel="stylesheet" media="screen" href="{ROOT_PATH}lights/christmaslights.css" />
 <script type="text/javascript" src="{ROOT_PATH}lights/soundmanager2-nodebug-jsmin.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}lights/animation-min.js"></script>
@@ -49,14 +49,12 @@
 var urlBase = './lights/';
 soundManager.url = './lights/';
 </script>
-<!-- / CHRISTMAS LIGHTS -->]]></action>
+<!-- ENDIF -->]]></action>
 			</edit>
 			<edit>
 				<find><![CDATA[<body class="{S_CONTENT_DIRECTION}">
 ]]></find>
-				<action type="after-add"><![CDATA[<div id="lights">
- <!-- lights go here -->
-</div>]]></action>
+				<action type="after-add"><![CDATA[<!-- IF S_SCL_ENABLED --><div id="lights"><!-- lights go here --></div><!-- ENDIF -->]]></action>
 			</edit>
 		</open>
 		<diy-instructions lang="en"><![CDATA[Login to your forum as admin, purge the cache, and refresh the template in the ACP.

@@ -38,12 +38,25 @@
 	</header>
 	<action-group>
 		<copy>
+			<file from="root/adm/*.*" to="adm/*.*"/>
+			<file from="root/includes/*.*" to="includes/*.*"/>
+			<file from="root/language/*.*" to="language/*.*"/>
 			<file from="root/lights/*.*" to="lights/*.*"/>
+			<file from="root/umil/*.*" to="umil/*.*"/>
+			<file from="root/install.php" to="install.php"/>
 		</copy>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[		'S_SEARCH_HIDDEN_FIELDS'	=> build_hidden_fields($s_search_hidden_fields),]]></find>
+				<action type="after-add"><![CDATA[		// Begin Smashable Christmas Lights
+		'S_SCL_ENABLED'			=> $config['scl_enabled'],
+		// End Smashable Christmas Lights]]></action>
+			</edit>
+		</open>
 		<open src="styles/prosilver/template/overall_header.html">
 			<edit>
 				<find><![CDATA[</head>]]></find>
-				<action type="before-add"><![CDATA[<!-- CHRISTMAS LIGHTS -->
+				<action type="before-add"><![CDATA[<!-- IF S_SCL_ENABLED -->
 <link rel="stylesheet" media="screen" href="{ROOT_PATH}lights/christmaslights.css" />
 <script type="text/javascript" src="{ROOT_PATH}lights/soundmanager2-nodebug-jsmin.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}lights/animation-min.js"></script>
@@ -52,16 +65,15 @@
 var urlBase = './lights/';
 soundManager.url = './lights/';
 </script>
-<!-- / CHRISTMAS LIGHTS -->]]></action>
+<!-- ENDIF -->]]></action>
 			</edit>
 			<edit>
 				<find><![CDATA[<body id="phpbb" class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">
 ]]></find>
-				<action type="after-add"><![CDATA[<div id="lights">
- <!-- lights go here -->
-</div>]]></action>
+				<action type="after-add"><![CDATA[<!-- IF S_SCL_ENABLED --><div id="lights"><!-- lights go here --></div><!-- ENDIF -->]]></action>
 			</edit>
 		</open>
+		<php-installer><![CDATA[install.php]]></php-installer>
 		<diy-instructions lang="en"><![CDATA[Login to your forum as admin, purge the cache, and refresh the template in the ACP.
 If you have problems clicking links in an area under the lightbulbs, you have to open lights/christmaslights.css and find the class #lights { and change height:96px; to a value that is appropriate, some browsers this div object overlays the normal site and so you cannot click anything. It's set by default to 96px so it doesn't get in conflict with any site object.
 don't set it too tiny, otherwise the exploding fragments will disappear too early and won't look so nice.]]></diy-instructions>
