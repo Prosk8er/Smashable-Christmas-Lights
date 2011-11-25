@@ -39,22 +39,39 @@
 	<action-group>
 		<open src="styles/subsilver2/template/overall_header.html">
 			<edit>
+				<comment lang="en"><![CDATA[Around Line 141]]></comment>
 				<find><![CDATA[</head>]]></find>
-				<action type="before-add"><![CDATA[<!-- IF S_SCL_ENABLED -->
+				<action type="before-add"><![CDATA[<!-- IF S_SCL_ENABLED and S_SCL_UCP_ENABLED -->
 <link rel="stylesheet" media="screen" href="{ROOT_PATH}lights/christmaslights.css" />
 <script type="text/javascript" src="{ROOT_PATH}lights/soundmanager2-nodebug-jsmin.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}lights/animation-min.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}lights/christmaslights.js"></script>
 <script type="text/javascript">
-var urlBase = './lights/';
-soundManager.url = './lights/';
+var urlBase = '{ROOT_PATH}lights/';
+soundManager.url = '{ROOT_PATH}lights/';
 </script>
 <!-- ENDIF -->]]></action>
 			</edit>
 			<edit>
+				<comment lang="en"><![CDATA[Around Line 152]]></comment>
 				<find><![CDATA[<body class="{S_CONTENT_DIRECTION}">
 ]]></find>
-				<action type="after-add"><![CDATA[<!-- IF S_SCL_ENABLED --><div id="lights"><!-- lights go here --></div><!-- ENDIF -->]]></action>
+				<action type="after-add"><![CDATA[<!-- IF S_SCL_ENABLED and S_SCL_UCP_ENABLED --><div id="lights"><!-- lights go here --></div><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/subsilver2/template/ucp_prefs_personal.html">
+			<edit>
+				<comment lang="en"><![CDATA[Around Line 60]]></comment>
+				<find><![CDATA[<tr> 
+	<td class="row1" width="50%"><b class="genmed">{L_POPUP_ON_PM}:</b></td>
+	<td class="row2"><input type="radio" class="radio" name="popuppm" value="1"<!-- IF S_POPUP_PM --> checked="checked"<!-- ENDIF --> /><span class="genmed">{L_YES}</span>&nbsp;&nbsp;<input type="radio" class="radio" name="popuppm" value="0"<!-- IF not S_POPUP_PM --> checked="checked"<!-- ENDIF --> /><span class="genmed">{L_NO}</span></td>
+</tr>]]></find>
+				<action type="after-add"><![CDATA[<!-- IF S_SCL_ENABLED -->
+	<tr> 
+		<td class="row1" width="50%"><b class="genmed">{L_SCL_ENABLED}:</b><br /><span class="gensmall">{L_SCL_ENABLED_EXPLAIN}</span></td>
+		<td class="row2"><input type="radio" class="radio" name="scl_ucp_enabled" value="1"<!-- IF S_SCL_UCP_ENABLED --> checked="checked"<!-- ENDIF --> /><span class="genmed">{L_YES}</span>&nbsp;&nbsp;<input type="radio" class="radio" name="scl_ucp_enabled" value="0"<!-- IF not S_SCL_UCP_ENABLED --> checked="checked"<!-- ENDIF --> /><span class="genmed">{L_NO}</span></td>
+	</tr>
+<!-- ENDIF -->]]></action>
 			</edit>
 		</open>
 		<diy-instructions lang="en"><![CDATA[Login to your forum as admin, purge the cache, and refresh the template in the ACP.

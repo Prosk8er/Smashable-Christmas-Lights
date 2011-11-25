@@ -37,6 +37,10 @@ $versions = array(
 			array('scl_enabled'),
 		),
 
+		'table_column_add' => array(
+			array('phpbb_users', 'user_scl_enabled', array('BOOL', '1')),
+		),
+
 		'module_add' => array(
 			array('acp', 'ACP_CAT_DOT_MODS', 'SCL_ACP'),
 

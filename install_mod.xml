@@ -47,30 +47,80 @@
 		</copy>
 		<open src="includes/functions.php">
 			<edit>
+				<comment lang="en"><![CDATA[Around Line 4550]]></comment>
 				<find><![CDATA[		'S_SEARCH_HIDDEN_FIELDS'	=> build_hidden_fields($s_search_hidden_fields),]]></find>
 				<action type="after-add"><![CDATA[		// Begin Smashable Christmas Lights
-		'S_SCL_ENABLED'			=> $config['scl_enabled'],
+		'S_SCL_ENABLED'			=> ($config['scl_enabled']) ? true : false,
+		'S_SCL_UCP_ENABLED'		=> (!empty($user->data['user_scl_enabled'])) ? true : false,
 		// End Smashable Christmas Lights]]></action>
+			</edit>
+		</open>
+		<open src="includes/ucp/ucp_prefs.php">
+			<edit>
+				<comment lang="en"><![CDATA[Around Line 44]]></comment>
+				<find><![CDATA[					'style'			=> request_var('style', (int) $user->data['user_style']),]]></find>
+				<action type="after-add"><![CDATA[					'scl_ucp_enabled'		=> request_var('scl_ucp_enabled', (bool) $user->data['user_scl_enabled']),]]></action>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Around Line 95]]></comment>
+				<find><![CDATA[							'user_style'			=> $data['style'],]]></find>
+				<action type="after-add"><![CDATA[							'user_scl_enabled'		=> $data['scl_ucp_enabled'],]]></action>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Around Line 154]]></comment>
+				<find><![CDATA[					'S_STYLE_OPTIONS'		=> ($config['override_user_style']) ? '' : style_select($data['style']),]]></find>
+				<action type="after-add"><![CDATA[					'S_SCL_UCP_ENABLED'		=> $data['scl_ucp_enabled'],]]></action>
+			</edit>
+		</open>
+		<open src="language/en/ucp.php">
+			<edit>
+				<comment lang="en"><![CDATA[Around Line 391]]></comment>
+				<find><![CDATA[	'SAME_PASSWORD_ERROR'		=> 'The new password you entered is the same as your current password.',]]></find>
+				<action type="after-add"><![CDATA[	'SCL_ENABLED'			=> 'Enable Smashable Christmas Lights',
+	'SCL_ENABLED_EXPLAIN'		=> 'Enables or disables the Smashable Christmas Lights.',]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/overall_header.html">
 			<edit>
+				<comment lang="en"><![CDATA[Around Line 97]]></comment>
 				<find><![CDATA[</head>]]></find>
-				<action type="before-add"><![CDATA[<!-- IF S_SCL_ENABLED -->
+				<action type="before-add"><![CDATA[<!-- IF S_SCL_ENABLED and S_SCL_UCP_ENABLED -->
 <link rel="stylesheet" media="screen" href="{ROOT_PATH}lights/christmaslights.css" />
 <script type="text/javascript" src="{ROOT_PATH}lights/soundmanager2-nodebug-jsmin.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}lights/animation-min.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}lights/christmaslights.js"></script>
 <script type="text/javascript">
-var urlBase = './lights/';
-soundManager.url = './lights/';
+var urlBase = '{ROOT_PATH}lights/';
+soundManager.url = '{ROOT_PATH}lights/';
 </script>
 <!-- ENDIF -->]]></action>
 			</edit>
 			<edit>
+				<comment lang="en"><![CDATA[Around Line 109]]></comment>
 				<find><![CDATA[<body id="phpbb" class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">
 ]]></find>
-				<action type="after-add"><![CDATA[<!-- IF S_SCL_ENABLED --><div id="lights"><!-- lights go here --></div><!-- ENDIF -->]]></action>
+				<action type="after-add"><![CDATA[<!-- IF S_SCL_ENABLED and S_SCL_UCP_ENABLED --><div id="lights"><!-- lights go here --></div><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/ucp_prefs_personal.html">
+			<edit>
+				<comment lang="en"><![CDATA[Around Line 59]]></comment>
+				<find><![CDATA[	<dl>
+		<dt><label for="popuppm0">{L_POPUP_ON_PM}:</label></dt>
+		<dd>
+			<label for="popuppm1"><input type="radio" name="popuppm" id="popuppm1" value="1"<!-- IF S_POPUP_PM --> checked="checked"<!-- ENDIF --> /> {L_YES}</label> 
+			<label for="popuppm0"><input type="radio" name="popuppm" id="popuppm0" value="0"<!-- IF not S_POPUP_PM --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>]]></find>
+				<action type="after-add"><![CDATA[	<!-- IF S_SCL_ENABLED -->
+		<dl>
+			<dt><label for="scl_ucp_enabled0">{L_SCL_ENABLED}:</label><br /><span>{L_SCL_ENABLED_EXPLAIN}</span></dt>
+			<dd>
+				<label for="scl_ucp_enabled1"><input type="radio" name="scl_ucp_enabled" id="scl_ucp_enabled1" value="1"<!-- IF S_SCL_UCP_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label> 
+				<label for="scl_ucp_enabled0"><input type="radio" name="scl_ucp_enabled" id="scl_ucp_enabled0" value="0"<!-- IF not S_SCL_UCP_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+	<!-- ENDIF -->]]></action>
 			</edit>
 		</open>
 		<php-installer><![CDATA[install.php]]></php-installer>
