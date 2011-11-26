@@ -50,7 +50,7 @@
 				<comment lang="en"><![CDATA[Around Line 4550]]></comment>
 				<find><![CDATA[		'S_SEARCH_HIDDEN_FIELDS'	=> build_hidden_fields($s_search_hidden_fields),]]></find>
 				<action type="after-add"><![CDATA[		// Begin Smashable Christmas Lights
-		'S_SCL_ENABLED'			=> ($config['scl_enabled']) ? true : false,
+		'S_SCL_ENABLED'			=> (!empty($config['scl_enabled'])) ? true : false,
 		'S_SCL_UCP_ENABLED'		=> (!empty($user->data['user_scl_enabled'])) ? true : false,
 		// End Smashable Christmas Lights]]></action>
 			</edit>
