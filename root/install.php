@@ -51,6 +51,8 @@ $versions = array(
 				),
 			),
 		),
+
+		'cache_purge' => array('', 'imageset', 'template', 'theme'),
 	),
 );
 
