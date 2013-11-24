@@ -1,29 +1,29 @@
 <?php
-
 /**
 *
-* @package - Share On
-* @version $Id: info_acp_shareon.php 2010-03-12 02:40 Saske1 $
-* @copyright (c) Saske1 ( http://www.phpbbsaske.com )
+* Smashable Christmas Lights [English]
+*
+* @author Prosk8er (Tyler) prosk8er@gotskillslounge.com
+* @package Smashable Christmas Lights
+* @version $Id: info_acp_christmas_lights.php 100 2013-11-23 14:05:00Z Prosk8er $
+* @copyright (c) 2013 Prosk8er ( http://www.gotskillslounge.com/ )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* 
+*
 */
 
 /**
-* @ignore
+* DO NOT CHANGE
 */
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
-/**
-* DO NOT CHANGE
-*/
 if (empty($lang) || !is_array($lang))
 {
-    $lang = array();
+	$lang = array();
 }
+
 // DEVELOPERS PLEASE NOTE
 //
 // All language files should use UTF-8 as their encoding and the files must not contain a BOM.
@@ -44,7 +44,13 @@ $lang = array_merge($lang, array(
 	'SCL_CONFIG'		=> 'Settings',
 	'SCL_SAVED'		=> 'Changes Saved.',
 	'SCL_ENABLED'		=> 'Enable "Smashable Christmas Lights"',
-	
+
+	'INSTALL_SCL_MOD'		=> 'Install Smashable Christmas Lights Mod',
+	'INSTALL_SCL_MOD_CONFIRM'	=> 'Are you sure you want to install the Smashable Christmas Lights Mod?',
+	'UPDATE_SCL_MOD'		=> 'Update Smashable Christmas Lights Mod',
+	'UPDATE_SCL_MOD_CONFIRM'	=> 'Are you sure you want to update the Smashable Christmas Lights Mod?',
+	'UNINSTALL_SCL_MOD'		=> 'Uninstall Smashable Christmas Lights Mod',
+	'UNINSTALL_SCL_MOD_CONFIRM'	=> 'Are you sure you want to uninstall the Smashable Christmas Lights Mod?',
 ));
 
 ?>

@@ -6,18 +6,22 @@
 <p>{L_SCL_EXPLAIN}</p>
 
 <form id="acp_christmas_lights" method="post" action="{U_ACTION}">
+
 	<fieldset>
 		<dl>
 			<dt><label for="scl_enabled">{L_SCL_ENABLED}</label></dt>
-			<dd><input type="radio" class="radio" name="scl_enabled" value="1" <!-- IF SCL_ENABLED -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp; 
-				<input type="radio" class="radio" name="scl_enabled" value="0" <!-- IF not SCL_ENABLED -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
+			<dd>
+				<input type="radio" class="radio" name="scl_enabled" value="1"<!-- IF SCL_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES} &nbsp; 
+				<input type="radio" class="radio" name="scl_enabled" value="0"<!-- IF not SCL_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}
+			</dd>
 		</dl>
 	</fieldset>
 
-		<p class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
-		</p>
+	<p class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	</p>
 	{S_FORM_TOKEN}
 </form>
+
 <!-- INCLUDE overall_footer.html -->
